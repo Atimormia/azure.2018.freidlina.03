@@ -18,8 +18,8 @@ namespace AdventureWorks.API
             var thisAssembly = typeof(SwaggerConfig).Assembly;
 
             GlobalConfiguration.Configuration
-                .EnableSwagger(c =>c.SingleApiVersion("v1", "AdventureWorks.API"))
-                        .EnableSwaggerUi();
+                .EnableSwagger(c => c.SingleApiVersion("v2", "AdventureWorks.API"))
+                .EnableSwaggerUi();
         }
     }
 
