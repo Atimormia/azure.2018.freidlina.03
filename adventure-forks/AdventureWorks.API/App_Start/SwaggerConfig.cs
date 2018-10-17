@@ -22,5 +22,4 @@ namespace AdventureWorks.API
                 .EnableSwaggerUi();
         }
     }
-
 }
