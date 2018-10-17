@@ -13,7 +13,7 @@ namespace AdventureWorks.API
 {
     public class SwaggerConfig
     {
-        public static void Register()
+        public static void Register() 
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
 
