@@ -230,6 +230,7 @@
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
     <None Include="Properties\PublishProfiles\aw-vm-app1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\aw-vm-app2 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\hr-console-freidlin - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\production-manager-freidlina - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

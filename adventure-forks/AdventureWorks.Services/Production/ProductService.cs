@@ -59,8 +59,9 @@ namespace AdventureWorks.Services.Production
         {
             try
             {
-                _entities.Products.Remove(_entities.Products.SingleOrDefault(x => x.ProductID == id) ??
-                                      throw new InvalidOperationException());
+                var entity = _entities.Products.SingleOrDefault(x => x.ProductID == id);
+                if (entity == null) return;
+                _entities.Products.Remove(entity);
                 _entities.SaveChanges();
             }
             catch (Exception e)
