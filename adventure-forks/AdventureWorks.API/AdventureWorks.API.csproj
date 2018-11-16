@@ -151,6 +151,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\adwenture-works-api - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\hr-console-freidlina-api - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\test-adventure-works-api - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

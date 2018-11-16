@@ -7,10 +7,16 @@ using Serilog;
 
 namespace AdventureWorks.Services.Production
 {
+    using Microsoft.WindowsAzure.Storage;
+
     public class ProductService : IProductService
     {
         private readonly DbModel.Entities _entities = new DbModel.Entities();
-        private readonly ILogger _log = new LoggerConfiguration().CreateLogger();
+
+        private readonly ILogger _log = new LoggerConfiguration().ReadFrom.AppSettings().WriteTo
+            .AzureTableStorageWithProperties(
+                CloudStorageAccount.DevelopmentStorageAccount,
+                storageTableName: "adventure-works-logs").MinimumLevel.Debug().CreateLogger();
         public IEnumerable<Product> GetProducts()
         {
             try
@@ -30,6 +36,7 @@ namespace AdventureWorks.Services.Production
         {
             try
             {
+                _log.Debug($"Get product with id = {id}");
                 return MapProductFromDb(_entities.Products.Find(id));
             }
             catch (Exception e)
