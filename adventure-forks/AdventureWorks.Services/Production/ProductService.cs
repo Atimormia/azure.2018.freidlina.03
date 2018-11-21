@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Azure;
 using Serilog;
 
 namespace AdventureWorks.Services.Production
@@ -12,11 +13,18 @@ namespace AdventureWorks.Services.Production
     public class ProductService : IProductService
     {
         private readonly DbModel.Entities _entities = new DbModel.Entities();
+        private readonly ILogger _log;
 
-        private readonly ILogger _log = new LoggerConfiguration().ReadFrom.AppSettings().WriteTo
-            .AzureTableStorageWithProperties(
-                CloudStorageAccount.DevelopmentStorageAccount,
-                storageTableName: "adventure-works-logs").MinimumLevel.Debug().CreateLogger();
+        public ProductService()
+        {
+            var connection = CloudConfigurationManager.GetSetting("StorageConnectionString");
+            var storage = CloudStorageAccount.Parse(connection);
+            _log = new LoggerConfiguration()
+                .WriteTo.AzureTableStorage(storage)
+                .MinimumLevel.Debug()
+                .CreateLogger();
+        }
+
         public IEnumerable<Product> GetProducts()
         {
             try
