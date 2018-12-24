@@ -1,34 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
-using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using System.Web.Http.Filters;
-using Microsoft.Azure;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
-using Microsoft.WindowsAzure.Storage.Queue;
 using Swashbuckle.Swagger;
+using AdventureWorks.Services.Common;
 
 namespace AdventureWorks.API.Controllers
 {
     public class ProductionController : ApiController
     {
-        private readonly CloudBlobClient _blobClient;
-        private readonly CloudQueueClient _queueClient;
+        private readonly IFileLoader _fileLoader;
 
-        public ProductionController()
+        public ProductionController(IFileLoader fileLoader)
         {
-            var connection = CloudConfigurationManager.GetSetting("AccountConnectionString");
-            var storage = CloudStorageAccount.Parse(connection);
-            _blobClient = storage.CreateCloudBlobClient();
-            _queueClient = storage.CreateCloudQueueClient();
+            _fileLoader = fileLoader;
         }
 
         // POST: api/Production
@@ -45,13 +34,7 @@ namespace AdventureWorks.API.Controllers
             var provider = await Request.Content.ReadAsMultipartAsync();
             var bytes = await provider.Contents.First().ReadAsByteArrayAsync();
 
-            var container = _blobClient.GetContainerReference("adventure-works-files");
-            var filename = $"{DateTime.Now:s}_{Guid.NewGuid()}.docx";
-            var blob = container.GetBlockBlobReference(filename);
-            blob.UploadFromByteArray(bytes, 0, bytes.Length);
-
-            await _queueClient.GetQueueReference("adventure-works-queue")
-                .AddMessageAsync(new CloudQueueMessage($"File {filename} was uploaded"));
+            await _fileLoader.UploadFile(bytes);
 
             return Ok();
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventureWorks.DR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,7 @@ namespace AdventureWorks.API
     {
         protected void Application_Start()
         {
+            AutofacConfig.ConfigureContainerForWebapi(GlobalConfiguration.Configuration, typeof(WebApiApplication));
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }

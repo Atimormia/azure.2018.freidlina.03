@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventureWorks.DR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,8 @@ namespace AdventureWorks.Web
     {
         protected void Application_Start()
         {
+            AutofacConfig.ConfigureContainerForMvc(typeof(MvcApplication));
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Azure;
 using Serilog;
 
 namespace AdventureWorks.Services.Production
 {
-    using Microsoft.WindowsAzure.Storage;
+    using Common;
 
     public class ProductService : IProductService
     {
@@ -17,12 +14,7 @@ namespace AdventureWorks.Services.Production
 
         public ProductService()
         {
-            var connection = CloudConfigurationManager.GetSetting("StorageConnectionString");
-            var storage = CloudStorageAccount.Parse(connection);
-            _log = new LoggerConfiguration()
-                .WriteTo.AzureTableStorage(storage)
-                .MinimumLevel.Debug()
-                .CreateLogger();
+            _log = ServiceConfigurator.GetLogger();
         }
 
         public IEnumerable<Product> GetProducts()
@@ -37,7 +29,6 @@ namespace AdventureWorks.Services.Production
                 _log.Error(e, "Exception");
                 throw;
             }
-
         }
 
         public Product GetProduct(int id)

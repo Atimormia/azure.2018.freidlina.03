@@ -47,6 +47,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.DependencyCollector, Version=2.7.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.7.2\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
     </Reference>
@@ -306,6 +310,10 @@
     <ProjectReference Include="..\AdventureWorks.DbModel\AdventureWorks.DbModel.csproj">
       <Project>{81e96cda-f8b3-4b85-a60d-4a3fe5b1c7b2}</Project>
       <Name>AdventureWorks.DbModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdventureWorks.DR\AdventureWorks.DR.csproj">
+      <Project>{5219EAC2-69E0-4AC5-A3C9-586718548A63}</Project>
+      <Name>AdventureWorks.DR</Name>
     </ProjectReference>
     <ProjectReference Include="..\AdventureWorks.Services\AdventureWorks.Services.csproj">
       <Project>{9ce302a2-d18a-4530-880b-195487d9918b}</Project>

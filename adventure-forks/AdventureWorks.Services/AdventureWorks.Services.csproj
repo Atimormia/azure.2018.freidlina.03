@@ -85,6 +85,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AzureFileLoader.cs" />
+    <Compile Include="Common\IFileLoader.cs" />
+    <Compile Include="Common\ServiceConfigurator.cs" />
     <Compile Include="HumanResources\Department.cs" />
     <Compile Include="HumanResources\DepartmentInfo.cs" />
     <Compile Include="HumanResources\DepartmentService.cs" />
